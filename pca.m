@@ -5,7 +5,18 @@ function [Y, k, meanX0, P, Sigma, recX] = pca(X0, threshold, method)
 meanX0 = (ones(n, 1) * mean(X0'))';
 X = X0 - meanX0;
 
-[V, D] = eig(X * X');
+if method == 'eig'
+	[V, D] = eig(X * X');
+	%disp('using Eigenvectors')
+elseif method == 'svd'
+	disp('using SVD ...')
+	[V, S, VV] = svd(X); % very slow
+	D = S.^2;
+	disp('SVD finished.')
+else
+	disp('ERR: Invalid method name!')
+	return
+end
 
 [sortedSigma, Index] = sort(diag(D), 'descend');
 
