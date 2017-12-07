@@ -1,9 +1,9 @@
-function y = linear_regression(data, label, predict_data)
-	W = train(data, label);
-	y = predict(predict_data, W);
+function [y, W] = linear_regression(data, expansion, label, predict_data)
+	W = train(data, expansion, label);
+	y = predict(predict_data, expansion, W);
 end
 
-function W = train(data, label)
+function W = train(data, expansion, label)
 	[h, w] = size(data);
 	min_label = min(label(:));
 	max_label = max(label(:));
@@ -15,7 +15,7 @@ function W = train(data, label)
 	W = Y * Z' * inv(Z * Z');
 end
 
-function y = predict(data, W)
+function y = predict(data, expansion, W)
 	[h, w] = size(data);
 	y = zeros(1, w);
 	for i = [1: w]
@@ -26,10 +26,10 @@ function y = predict(data, W)
 	end
 end
 
-function Z = expansion(X)
-	Z = X;
-	%Z = vertcat(X, X(1,:) .* X(2,:));
-end
+% function Z = expansion(X)
+% 	Z = X;
+% 	%Z = vertcat(X, X(1,:) .* X(2,:));
+% end
 
 % X = [
 % 0 0 1 1
