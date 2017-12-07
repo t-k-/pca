@@ -1,18 +1,26 @@
 clear
 
 Y = [
-1 0 0
-0 1 0
-0 0 1
-]
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+];
 
 X = [
-0 0 1
-0 1 0
-]
+0 0 1 1
+0 1 0 1
+];
 
-W = Y * X' * inv(X * X')
+Z = expansion(X)
 
-x = [0 1]'
+W = Y * Z' * inv(Z * Z');
 
-W*x
+W * expansion([0 0]')
+W * expansion([0 1]')
+W * expansion([1 0]')
+W * expansion([1 1]')
+
+function Z = expansion(X)
+	Z = vertcat(X, X(1,:) .* X(2,:));
+end
