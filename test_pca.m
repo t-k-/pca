@@ -7,8 +7,8 @@ X0 = [
 
 [img_matrix, labels] = read_hw;
 
-%method = 'eig';
-method = 'svd';
+method = 'eig';
+%method = 'svd';
 
 %%%
 % Example 0
