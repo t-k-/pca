@@ -1,4 +1,4 @@
-function [Y, k, meanX0, P, Sigma, recX] = pca(X0, threshold, method)
+function [Y, k, meanX0, P, Sigma, recX, sigmaPercents] = pca(X0, threshold, method)
 
 [p, n] = size(X0);
 
@@ -28,12 +28,17 @@ Sigma = diag(sortedSigma);
 
 totalSigma = sum(sortedSigma);
 curSigmaSum = 0;
-for k = [1: length(sortedSigma)]
-	curSigmaSum = curSigmaSum + sortedSigma(k);
-	if (curSigmaSum / totalSigma) >= threshold
-		break
+sigmaPercents = [];
+k = 0;
+for i = [1: length(sortedSigma)]
+	curSigmaSum = curSigmaSum + sortedSigma(i);
+	curPercent = curSigmaSum / totalSigma;
+	sigmaPercents = horzcat(sigmaPercents, curPercent);
+	if curPercent >= threshold && k == 0
+		k = i;
 	end
 end
+%plot(sigmaPercents, 'r-*');
 
 selectP = P(:, 1:k); % p by k
 Y = selectP' * X; % Y is k by n

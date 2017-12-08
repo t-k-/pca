@@ -36,13 +36,15 @@ method = 'eig';
 %%%
 % Example 2
 %%%
-[Y, k, meanX, P, Sigma, recX] = pca(img_matrix, 0.56, method);
+[Y, k, meanX, P, Sigma, recX, sigmaPercents] = pca(img_matrix, 0.56, method);
 k
-[Y, k, meanX, P, Sigma, recX] = pca(img_matrix, 0.9, method);
-k
-show_me_img(img_matrix);
-show_me_img(meanX);
+plot(sigmaPercents, 'b-*');
 
-scaled_P = 128 + P * 128;
-show_me_img(scaled_P);
-show_me_img(recX);
+% [Y, k, meanX, P, Sigma, recX] = pca(img_matrix, 0.9, method);
+% k
+% show_me_img(img_matrix);
+% show_me_img(meanX);
+% 
+% scaled_P = 128 + P * 128;
+% show_me_img(scaled_P);
+% show_me_img(recX);
