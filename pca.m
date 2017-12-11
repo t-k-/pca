@@ -42,4 +42,4 @@ end
 
 selectP = P(:, 1:k); % p by k
 Y = selectP' * X; % Y is k by n
-recX = selectP * Y;
+recX = selectP * Y; % p by n
