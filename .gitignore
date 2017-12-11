@@ -1,4 +1,5 @@
 train-images-idx3-ubyte
 train-labels-idx1-ubyte
+*.mat
 *.swp
 att_faces/
