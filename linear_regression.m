@@ -1,6 +1,7 @@
-function [y, W] = linear_regression(data, expansion, label, predict_data)
+function [y, W, z] = linear_regression(data, expansion, label, predict_data)
 	W = train(data, expansion, label);
 	y = predict(predict_data, expansion, W);
+	z = predict(data, expansion, W);
 end
 
 function W = train(data, expansion, label)

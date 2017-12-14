@@ -69,30 +69,54 @@ end
 % load('test_label.mat');
 
 %%%%
-% train, predict and judge accuracy using affine_expansion
+% train, predict and judge accuracy using base_expansion
 %%%%
-[y, W] = linear_regression(train_data, @affine_expansion, train_label, test_data);
-accuracy = sum(test_label == y) / length(y)
+[y, W, z] = linear_regression(train_data, @base_expansion, train_label, test_data);
+a = horzcat(test_label', y');
+b = horzcat(train_label', z');
+test_guess = (abs(test_label' - y') > 10);
+test_truth = vertcat(zeros(35 * 2, 1), ones(5 * 10, 1));
+pretty_res = horzcat(find(test_label)', test_label', test_guess, test_truth);
+
+accuracy = sum(test_guess == test_truth) / numel(test_truth)
 
 %%%%
 % train, predict and judge accuracy using polynomial2_expansion
 %%%%
-[y, W] = linear_regression(train_data, @polynomial2_expansion, train_label, test_data);
-accuracy = sum(test_label == y) / length(y)
+[y, W, z] = linear_regression(train_data, @polynomial2_expansion, train_label, test_data);
+a = horzcat(test_label', y');
+b = horzcat(train_label', z');
+test_guess = (abs(test_label' - y') > 10);
+test_truth = vertcat(zeros(35 * 2, 1), ones(5 * 10, 1));
+pretty_res = horzcat(find(test_label)', test_label', test_guess, test_truth);
+
+accuracy = sum(test_guess == test_truth) / numel(test_truth)
 
 %%%%
 % train, predict and judge accuracy using polynomial3_expansion
 %%%%
-[y, W] = linear_regression(train_data, @polynomial3_expansion, train_label, test_data);
-accuracy = sum(test_label == y) / length(y)
+[y, W, z] = linear_regression(train_data, @polynomial3_expansion, train_label, test_data);
+a = horzcat(test_label', y');
+b = horzcat(train_label', z');
+test_guess = (abs(test_label' - y') > 10);
+test_truth = vertcat(zeros(35 * 2, 1), ones(5 * 10, 1));
+pretty_res = horzcat(find(test_label)', test_label', test_guess, test_truth);
+
+accuracy = sum(test_guess == test_truth) / numel(test_truth)
 
 %%%%
 % train, predict and judge accuracy using polynomial4_expansion
 %%%%
-[y, W] = linear_regression(train_data, @polynomial4_expansion, train_label, test_data);
-accuracy = sum(test_label == y) / length(y)
+[y, W, z] = linear_regression(train_data, @polynomial4_expansion, train_label, test_data);
+a = horzcat(test_label', y');
+b = horzcat(train_label', z');
+test_guess = (abs(test_label' - y') > 10);
+test_truth = vertcat(zeros(35 * 2, 1), ones(5 * 10, 1));
+pretty_res = horzcat(find(test_label)', test_label', test_guess, test_truth);
 
-function Z = affine_expansion(X)
+accuracy = sum(test_guess == test_truth) / numel(test_truth)
+
+function Z = base_expansion(X)
 	[h, w] = size(X);
 	Z = vertcat(ones(1, w), X);
 end
