@@ -1,5 +1,6 @@
 train-images-idx3-ubyte
 train-labels-idx1-ubyte
 *.swp
+*.zip
 att_faces/
 non-face-data/
